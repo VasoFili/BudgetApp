@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 const startButton = document.getElementById('start');
 const buttonPlusIncome = document.getElementsByTagName('button')[0];
