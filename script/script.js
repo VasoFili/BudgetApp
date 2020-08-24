@@ -1,8 +1,4 @@
-// 'use strict';
-
-document.addEventListener('DOMContentLoaded', function () {
-   startButton.style.display = 'none';
-});
+'use strict';
 
 const startButton = document.getElementById('start');
 const buttonPlusIncome = document.getElementsByTagName('button')[0];
@@ -27,11 +23,15 @@ let expensesItems = document.querySelectorAll('.expenses-items');
 let incomeItems = document.querySelectorAll('.income-items');
 let periodAmount = document.querySelector('.period-amount');
 
+document.addEventListener('DOMContentLoaded', function () {
+   startButton.disabled = true;
+});
+
 const isNumber = function (n) {
    return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
-let appData = {
+const appData = {
    income: [],
    incomeMonth: 0,
    budget: 0,
@@ -48,10 +48,6 @@ let appData = {
    budgetDay: 0,
 
    start: function () {
-      //       if (salaryAmount.value === '') {
-      //          startButton.style.display = 'none';
-      //          return
-      //       }
 
       appData.budget = +salaryAmount.value;
 
@@ -76,7 +72,7 @@ let appData = {
       incomePeriodValue.value = appData.calcPeriod();
    },
    addExpensesBlock: function () {
-      let cloneExpensesItem = expensesItems[0].cloneNode(true);
+      const cloneExpensesItem = expensesItems[0].cloneNode(true);
       expensesItems[0].parentNode.insertBefore(cloneExpensesItem, buttonPlusExpenses);
       expensesItems = document.querySelectorAll('.expenses-items');
       if (expensesItems.length === 3) {
@@ -84,7 +80,7 @@ let appData = {
       };
    },
    addIncomeBlock: function () {
-      let cloneIncomeItem = incomeItems[0].cloneNode(true);
+      const cloneIncomeItem = incomeItems[0].cloneNode(true);
       incomeItems[0].parentNode.insertBefore(cloneIncomeItem, buttonPlusIncome);
       incomeItems = document.querySelectorAll('.income-items');
       if (incomeItems.length === 3) {
@@ -93,8 +89,8 @@ let appData = {
    },
    getExpenses: function () {
       expensesItems.forEach(function (item) {
-         let itemExpenses = item.querySelector('.expenses-title').value;
-         let cashExpenses = item.querySelector('.expenses-amount').value;
+         const itemExpenses = item.querySelector('.expenses-title').value;
+         const cashExpenses = item.querySelector('.expenses-amount').value;
          if (itemExpenses !== '' && cashExpenses !== '') {
             appData.expenses[itemExpenses] = cashExpenses;
          }
@@ -102,8 +98,8 @@ let appData = {
    },
    getIncome: function () {
       incomeItems.forEach(function (item) {
-         let itemIncome = item.querySelector('.income-title').value;
-         let cashIncome = item.querySelector('.income-amount').value;
+         const itemIncome = item.querySelector('.income-title').value;
+         const cashIncome = item.querySelector('.income-amount').value;
          if (itemIncome !== '' && cashIncome !== '') {
             appData.income[itemIncome] = cashIncome;
          }
@@ -115,7 +111,7 @@ let appData = {
 
    },
    getAddExpenses: function () {
-      let addExpenses = additionalExpensesItem.value.split(',');
+      const addExpenses = additionalExpensesItem.value.split(',');
       addExpenses.forEach(function (item) {
          item = item.trim();
          if (item !== '') {
@@ -125,7 +121,7 @@ let appData = {
    },
    getAddIncome: function () {
       additionalIncomeItem.forEach(function (item) {
-         let itemValue = item.value.trim();
+         const itemValue = item.value.trim();
          if (itemValue !== '') {
             appData.addIncome.push(itemValue);
          }
@@ -179,6 +175,19 @@ buttonPlusExpenses.addEventListener('click', appData.addExpensesBlock);
 buttonPlusIncome.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('input', appData.changeRange);
 periodSelect.addEventListener('input', appData.showResult);
+
+// salaryAmount.addEventListener('input', function () {
+//    if (salaryAmount.value !== '') {
+//       startButton.style.display = 'block';
+//    } else {
+//       startButton.style.display = 'none';
+//    }
+// });
+
 salaryAmount.addEventListener('input', function () {
-   startButton.style.display = 'block';
-})
+   if (salaryAmount.value !== '') {
+      startButton.disabled = false;
+   } else {
+      startButton.disabled = true;
+   }
+});
