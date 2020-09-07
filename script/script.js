@@ -75,20 +75,22 @@ const appData = {
       };
    },
    getExpenses: function () {
+      const _this = this;
       expensesItems.forEach(function (item) {
          const itemExpenses = item.querySelector('.expenses-title').value;
          const cashExpenses = item.querySelector('.expenses-amount').value;
          if (itemExpenses !== '' && cashExpenses !== '') {
-            this.expenses[itemExpenses] = cashExpenses;
+            _this.expenses[itemExpenses] = cashExpenses;
          }
       })
    },
    getIncome: function () {
+      const _this = this;
       incomeItems.forEach(function (item) {
          const itemIncome = item.querySelector('.income-title').value;
          const cashIncome = item.querySelector('.income-amount').value;
          if (itemIncome !== '' && cashIncome !== '') {
-            this.income[itemIncome] = cashIncome;
+            _this.income[itemIncome] = cashIncome;
          }
       })
 
@@ -98,19 +100,21 @@ const appData = {
 
    },
    getAddExpenses: function () {
+      const _this = this;
       const addExpenses = additionalExpensesItem.value.split(',');
       addExpenses.forEach(function (item) {
          item = item.trim();
          if (item !== '') {
-            this.addExpenses.push(item);
+            _this.addExpenses.push(item);
          }
       })
    },
    getAddIncome: function () {
+      const _this = this;
       additionalIncomeItem.forEach(function (item) {
          const itemValue = item.value.trim();
          if (itemValue !== '') {
-            this.addIncome.push(itemValue);
+            _this.addIncome.push(itemValue);
          }
       })
    },
@@ -250,6 +254,7 @@ const start = function () {
 
    resetButton.style.display = 'block';
    startButton.style.display = 'none';
+   startButton.disabled = true;
 
 };
 
@@ -257,15 +262,8 @@ startButton.addEventListener('click', start.bind(appData));
 buttonPlusExpenses.addEventListener('click', appData.addExpensesBlock);
 buttonPlusIncome.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('input', appData.changeRange);
-periodSelect.addEventListener('input', appData.showResult);
+// periodSelect.addEventListener('input', appData.showResult);
 resetButton.addEventListener('click', appData.reset);
-// salaryAmount.addEventListener('input', function () {
-//    if (salaryAmount.value !== '') {
-//       startButton.style.display = 'block';
-//    } else {
-//       startButton.style.display = 'none';
-//    }
-// });
 
 salaryAmount.addEventListener('input', function () {
    if (salaryAmount.value !== '') {
