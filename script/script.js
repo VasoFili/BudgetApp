@@ -231,14 +231,15 @@ AppData.prototype.reset = function () {
    periodAmount.textContent = '1';
    checkboxDeposit.checked = false;
 };
+
 AppData.prototype.eventListeners = function () {
-   startButton.addEventListener('click', this.start);
-   buttonPlusExpenses.addEventListener('click', this.addExpensesBlock);
-   buttonPlusIncome.addEventListener('click', this.addIncomeBlock);
-   salaryAmount.addEventListener('keyup', this.check);
-   resetButton.addEventListener('click', this.reset);
-   periodSelect.addEventListener('input', this.changeRange);
-   periodSelect.addEventListener('input', this.start);
+   const _this = this;
+   startButton.addEventListener('click', _this.start.bind(appData));
+   buttonPlusExpenses.addEventListener('click', _this.addExpensesBlock);
+   buttonPlusIncome.addEventListener('click', _this.addIncomeBlock);
+   salaryAmount.addEventListener('keyup', _this.check);
+   resetButton.addEventListener('click', _this.reset);
+   periodSelect.addEventListener('input', _this.changeRange);
 };
 
 const appData = new AppData();
