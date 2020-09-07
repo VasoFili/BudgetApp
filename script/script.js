@@ -225,37 +225,41 @@ const start = function () {
    this.showResult();
 
    // const allInput = document.querySelectorAll([type = 'text']);
-   // const allInput = document.querySelectorAll('input[type="text"]'); (ЭТО НЕ РАБОТАЕТ)
-   // allInput.disabled = true;
-   salaryAmount.disabled = true;
-   let allIncomeTitles = document.querySelectorAll('.income-title');
-   for (let i = 0; i < allIncomeTitles.length; i++) {
-      allIncomeTitles[i].disabled = true;
-   };
-   let allIncomeAmounts = document.querySelectorAll('.income-amount');
-   for (let i = 0; i < allIncomeAmounts.length; i++) {
-      allIncomeAmounts[i].disabled = true;
-   };
-   let allExpensesTitles = document.querySelectorAll('.expenses-title');
-   for (let i = 0; i < allExpensesTitles.length; i++) {
-      allExpensesTitles[i].disabled = true;
-   };
-   let allExpensesAmounts = document.querySelectorAll('.expenses-amount');
-   for (let i = 0; i < allExpensesAmounts.length; i++) {
-      allExpensesAmounts[i].disabled = true;
-   };
-   buttonPlusIncome.disabled = true;
-   additionalIncome1.disabled = true;
-   additionalIncome2.disabled = true;
-   buttonPlusExpenses.disabled = true;
-   additionalExpensesItem.disabled = true;
-   checkboxDeposit.disabled = true;
-   targetAmount.disabled = true;
-   periodSelect.disabled = true;
+   const allInput = document.querySelectorAll('input[type="text"]');
+   console.log(allInput);
+   allInput.forEach(function (elem) {
+      elem.value = '';
+      elem.disabled = true;
+   });
+   // salaryAmount.disabled = true;
+   // let allIncomeTitles = document.querySelectorAll('.income-title');
+   // for (let i = 0; i < allIncomeTitles.length; i++) {
+   //    allIncomeTitles[i].disabled = true;
+   // };
+   // let allIncomeAmounts = document.querySelectorAll('.income-amount');
+   // for (let i = 0; i < allIncomeAmounts.length; i++) {
+   //    allIncomeAmounts[i].disabled = true;
+   // };
+   // let allExpensesTitles = document.querySelectorAll('.expenses-title');
+   // for (let i = 0; i < allExpensesTitles.length; i++) {
+   //    allExpensesTitles[i].disabled = true;
+   // };
+   // let allExpensesAmounts = document.querySelectorAll('.expenses-amount');
+   // for (let i = 0; i < allExpensesAmounts.length; i++) {
+   //    allExpensesAmounts[i].disabled = true;
+   // };
+   // buttonPlusIncome.disabled = true;
+   // additionalIncome1.disabled = true;
+   // additionalIncome2.disabled = true;
+   // buttonPlusExpenses.disabled = true;
+   // additionalExpensesItem.disabled = true;
+   // checkboxDeposit.disabled = true;
+   // targetAmount.disabled = true;
+   // periodSelect.disabled = true;
 
-   resetButton.style.display = 'block';
-   startButton.style.display = 'none';
-   startButton.disabled = true;
+   // resetButton.style.display = 'block';
+   // startButton.style.display = 'none';
+   // startButton.disabled = true;
 
 };
 
