@@ -240,7 +240,7 @@ AppData.prototype.eventListeners = function () {
    buttonPlusExpenses.addEventListener('click', _this.addExpensesBlock);
    buttonPlusIncome.addEventListener('click', _this.addIncomeBlock);
    salaryAmount.addEventListener('keyup', _this.check);
-   resetButton.addEventListener('click', _this.reset);
+   resetButton.addEventListener('click', _this.reset.bind(appData));
    periodSelect.addEventListener('input', _this.changeRange);
 };
 
