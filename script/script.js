@@ -34,7 +34,7 @@ const isNumber = function (n) {
 };
 
 const appData = {
-   income: [],
+   income: {},
    incomeMonth: 0,
    budget: 0,
    addIncome: [],
@@ -96,10 +96,11 @@ const appData = {
          if (itemIncome !== '' && cashIncome !== '') {
             _this.income[itemIncome] = cashIncome;
          }
-      })
-
+      });
+      console.log(this.income);
       for (let key in this.income) {
          this.incomeMonth += +this.income[key];
+         console.log(this.incomeMonth);
       }
 
    },
@@ -182,7 +183,7 @@ const appData = {
          expensesItems[i].remove(expensesItems[i]);
       };
 
-      this.income = [];
+      this.income = {};
       this.incomeMonth = 0;
       this.budget = 0;
       this.addIncome = [];
