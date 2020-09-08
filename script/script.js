@@ -52,7 +52,6 @@ AppData.prototype.start = function () {
       item.setAttribute('disabled', 'true');
    });
    checkboxDeposit.disabled = true;
-   // periodSelect.disabled = true;
    buttonPlusExpenses.setAttribute('disabled', 'true');
    buttonPlusIncome.setAttribute('disabled', 'true');
    startButton.style.display = 'none';
@@ -197,11 +196,10 @@ AppData.prototype.reset = function () {
       elem.value = '';
    });
    for (let i = 1; i < incomeItems.length; i++) {
-      incomeItems[i].remove(incomeItems[i]);
-      buttonPlusIncome.style.display = 'block';
+      incomeItems[i].parentNode.removeChild(incomeItems[i]);
    };
    for (let i = 1; i < expensesItems.length; i++) {
-      expensesItems[i].remove(expensesItems[i]);
+      expensesItems[i].parentNode.removeChild(expensesItems[i]);
    };
 
    this.budget = 0;
@@ -217,11 +215,13 @@ AppData.prototype.reset = function () {
    this.moneyDeposit = 0;
    this.addExpenses = [];
 
+   buttonPlusIncome.style.display = 'block';
    buttonPlusExpenses.style.display = 'block';
    buttonPlusIncome.disabled = false;
    buttonPlusExpenses.disabled = false;
 
    checkboxDeposit.disabled = false;
+   checkboxDeposit.checked = false;
    periodSelect.disabled = false;
 
    resetButton.style.display = 'none';
@@ -229,7 +229,6 @@ AppData.prototype.reset = function () {
 
    periodSelect.value = '0';
    periodAmount.textContent = '1';
-   checkboxDeposit.checked = false;
 };
 
 AppData.prototype.eventListeners = function () {
