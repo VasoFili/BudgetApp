@@ -58,6 +58,9 @@ const appData = {
       additionalIncomeValue.value = this.addIncome.join(', ');
       targetMonthValue.value = Math.ceil(this.getTargetMonth());
       incomePeriodValue.value = this.calcPeriod();
+      periodSelect.addEventListener('input', function () {
+         incomePeriodValue.value = _this.calcPeriod();
+      });
    },
    addExpensesBlock: function () {
       const cloneExpensesItem = expensesItems[0].cloneNode(true);
@@ -266,7 +269,7 @@ startButton.addEventListener('click', appData.start.bind(appData));
 buttonPlusExpenses.addEventListener('click', appData.addExpensesBlock);
 buttonPlusIncome.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('input', appData.changeRange);
-periodSelect.addEventListener('input', appData.showResult);
+// periodSelect.addEventListener('input', appData.showResult);
 resetButton.addEventListener('click', appData.reset.bind(appData));
 
 salaryAmount.addEventListener('input', function () {
