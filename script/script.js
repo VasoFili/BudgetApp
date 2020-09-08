@@ -52,7 +52,7 @@ AppData.prototype.start = function () {
       item.setAttribute('disabled', 'true');
    });
    checkboxDeposit.disabled = true;
-   periodSelect.disabled = true;
+   // periodSelect.disabled = true;
    buttonPlusExpenses.setAttribute('disabled', 'true');
    buttonPlusIncome.setAttribute('disabled', 'true');
    startButton.style.display = 'none';
@@ -71,6 +71,7 @@ AppData.prototype.start = function () {
    this.showResult();
 };
 AppData.prototype.showResult = function () {
+   const _this = this;
    budgetMonthValue.value = this.budgetMonth;
    budgetDayValue.value = this.budgetDay;
    expensesMonthValue.value = this.expensesMonth;
@@ -78,9 +79,9 @@ AppData.prototype.showResult = function () {
    additionalIncomeValue.value = this.addIncome.join(', ');
    targetMonthValue.value = Math.ceil(this.getTargetMonth());
    incomePeriodValue.value = this.calcPeriod();
-   // periodSelect.addEventListener('change', function () {
-   //    incomePeriodValue.value = appData.calcPeriod();
-   // });
+   periodSelect.addEventListener('input', function () {
+      incomePeriodValue.value = _this.calcPeriod();
+   });
 };
 AppData.prototype.addExpensesBlock = function () {
    const cloneExpensesItem = expensesItems[0].cloneNode(true);
@@ -178,8 +179,7 @@ AppData.prototype.getInfoDeposit = function () {
    }
 };
 AppData.prototype.calcPeriod = function () {
-   // return this.budgetMonth * periodSelect.value;
-   return salaryAmount.value * periodSelect.value;
+   return this.budgetMonth * periodSelect.value;
 };
 AppData.prototype.changeRange = function () {
    periodAmount.textContent = periodSelect.value;
