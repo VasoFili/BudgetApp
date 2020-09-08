@@ -68,6 +68,7 @@ AppData.prototype.start = function () {
    // this.getInfoDeposit();
    this.getStatusIncome();
    this.showResult();
+   console.log(appData);
 };
 AppData.prototype.showResult = function () {
    const _this = this;
@@ -229,6 +230,8 @@ AppData.prototype.reset = function () {
 
    periodSelect.value = '0';
    periodAmount.textContent = '1';
+
+   console.log(appData);
 };
 
 AppData.prototype.eventListeners = function () {
