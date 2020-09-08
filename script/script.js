@@ -58,8 +58,6 @@ const appData = {
       additionalIncomeValue.value = this.addIncome.join(', ');
       targetMonthValue.value = Math.ceil(this.getTargetMonth());
       incomePeriodValue.value = this.calcPeriod();
-      periodSelect.addEventListener('input', appData.showIncomePeriodValue);
-
    },
    addExpensesBlock: function () {
       const cloneExpensesItem = expensesItems[0].cloneNode(true);
