@@ -8,6 +8,9 @@ let expensesItems = document.querySelectorAll('.expenses-items'); // Обяза�
 const buttonPlusExpenses = document.getElementsByTagName('button')[1]; // Плюс, добавить обязательный расход
 const additionalExpensesItem = document.querySelector('.additional_expenses-item'); // Возможные расходы
 const checkboxDeposit = document.querySelector('#deposit-check'); // Депозит да/нет
+const depositBank = document.querySelector('.deposit-bank');
+const depositAmount = document.querySelector('.deposit-amount');
+const depositPercent = document.querySelector('.deposit-percent');
 const targetAmount = document.querySelector('.target-amount'); // Цель
 const periodSelect = document.querySelector('.period-select'); // Период расчета
 const periodAmount = document.querySelector('.period-amount'); // Период расчета число
@@ -64,8 +67,8 @@ class AppData {
       this.getExpensesMonth();
       this.getAddExpenses();
       this.getAddIncome();
+      this.getInfoDeposit();
       this.getBudget();
-      // this.getInfoDeposit();
       this.getStatusIncome();
       this.showResult();
    }
@@ -148,7 +151,8 @@ class AppData {
       }
    }
    getBudget() {
-      this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth;
+      const monthDeposit = this.moneyDeposit * (this.percentDeposit / 100);
+      this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth + monthDeposit;
       this.budgetDay = Math.floor(this.budgetMonth / 30);
    }
    getTargetMonth() {
@@ -166,14 +170,9 @@ class AppData {
       };
    }
    getInfoDeposit() {
-      this.deposit = confirm(`Есть ли у Вас депозит в банке?`);
       if (this.deposit) {
-         do {
-            this.percentDeposit = prompt(`Какой годовой процент?`, 10);
-         } while (!isNaN(this.percentDeposit) && isFinite(this.percentDeposit));
-         do {
-            this.moneyDeposit = prompt(`Какая сумма заложена?`, 10000);
-         } while (!isNaN(this.moneyDeposit) && isFinite(this.moneyDeposit));
+         this.percentDeposit = depositPercent.value;
+         this.moneyDeposit = depositAmount.value;
       }
    }
    calcPeriod() {
@@ -228,6 +227,43 @@ class AppData {
 
       periodSelect.value = '0';
       periodAmount.textContent = '1';
+
+      depositBank.style.display = 'none';
+      depositAmount.style.display = 'none';
+      depositPercent.style.display = 'none';
+      depositBank.value = '';
+   }
+   changePercent() {
+      const valueSelect = this.value;
+      if (valueSelect === 'other') {
+         depositPercent.style.display = 'inline-block';
+         depositPercent.addEventListener('input', this.checkPercent);
+         depositPercent.value = '';
+      } else {
+         depositPercent.value = valueSelect;
+         depositPercent.removeEventListener('blur', this.checkPercent);
+      }
+   }
+   checkPercent() {
+      if (depositPercent.value > 100) {
+         alert("Введите корректное значение в поле проценты");
+         // startButton.setAttribute('disabled', 'true');
+      }
+   }
+   depositHandler() {
+      if (checkboxDeposit.checked) {
+         depositBank.style.display = 'inline-block';
+         depositAmount.style.display = 'inline-block';
+         this.deposit = true;
+         depositBank.addEventListener('change', this.changePercent);
+      } else {
+         depositBank.style.display = 'none';
+         depositAmount.style.display = 'none';
+         depositBank.value = '';
+         depositAmount.value = '';
+         this.deposit = false;
+         depositBank.removeEventListener('change', this.changePercent);
+      }
    }
    eventListeners() {
       const _this = this;
@@ -237,8 +273,19 @@ class AppData {
       salaryAmount.addEventListener('keyup', _this.check);
       resetButton.addEventListener('click', _this.reset.bind(appData));
       periodSelect.addEventListener('input', _this.changeRange);
+      checkboxDeposit.addEventListener('change', this.depositHandler.bind(this));
+      // checkPersent.addEventListener('keyup')
    }
 }
 
 const appData = new AppData();
 appData.eventListeners();
+
+// !isNaN(parseFloat(n)) && isFinite(n)
+// !isNaN(depositPercent.value) && isFinite(depositPercent.value) && 
+// depositPercent.value > 100 || depositPercent.value < 0 || 
+// checkPersent() {
+//    if (this.deposit && !isNaN(this.percentDeposit) && isFinite(this.percentDeposit)) {
+// depositPercent.value.replace(/\s/g, '').length === 0 || 
+//    }
+// }
