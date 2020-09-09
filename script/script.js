@@ -237,17 +237,15 @@ class AppData {
       const valueSelect = this.value;
       if (valueSelect === 'other') {
          depositPercent.style.display = 'inline-block';
-         depositPercent.addEventListener('input', this.checkPercent);
+         depositPercent.addEventListener('blur', () => {
+            if (depositPercent.value > 100 || depositPercent.value < 0 || (isNaN(depositPercent.value) && !isFinite(depositPercent.value))) {
+               alert("Введите корректное значение в поле проценты");
+               depositPercent.value = ''
+            }
+         });
          depositPercent.value = '';
       } else {
          depositPercent.value = valueSelect;
-         depositPercent.removeEventListener('blur', this.checkPercent);
-      }
-   }
-   checkPercent() {
-      if (depositPercent.value > 100) {
-         alert("Введите корректное значение в поле проценты");
-         // startButton.setAttribute('disabled', 'true');
       }
    }
    depositHandler() {
@@ -274,18 +272,8 @@ class AppData {
       resetButton.addEventListener('click', _this.reset.bind(appData));
       periodSelect.addEventListener('input', _this.changeRange);
       checkboxDeposit.addEventListener('change', this.depositHandler.bind(this));
-      // checkPersent.addEventListener('keyup')
    }
 }
 
 const appData = new AppData();
 appData.eventListeners();
-
-// !isNaN(parseFloat(n)) && isFinite(n)
-// !isNaN(depositPercent.value) && isFinite(depositPercent.value) && 
-// depositPercent.value > 100 || depositPercent.value < 0 || 
-// checkPersent() {
-//    if (this.deposit && !isNaN(this.percentDeposit) && isFinite(this.percentDeposit)) {
-// depositPercent.value.replace(/\s/g, '').length === 0 || 
-//    }
-// }
